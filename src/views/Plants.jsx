@@ -112,7 +112,7 @@ export default function Plants() {
     });
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '700px', margin: '0 auto', textAlign: 'left' }}>
+    <div style={{ padding: '2rem', paddingTop: '11rem', maxWidth: '700px', margin: '0 auto', textAlign: 'left' }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', marginBottom: 24 }}>
         <SearchField
           handleinput={e => setFilter(e.target.value)}

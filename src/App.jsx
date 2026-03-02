@@ -24,6 +24,12 @@
 
 //export default App
 // in App.jsx or main.jsx
+
+import Header from './components/Header';
+import Footer from './components/Footer';
+import DefaultPage from './views/DefaultPage';
+import Plants from './views/Plants';
+import About from './views/About';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
