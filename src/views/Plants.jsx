@@ -96,7 +96,11 @@ export default function Plants() {
   };
 
   const handleDelete = idx => {
-    setPlants(plants.filter((_, i) => i !== idx));
+    const plantName = plants[idx]?.name || 'this plant';
+    const confirmed = window.confirm(`Are you sure you want to delete ${plantName}?`);
+    if (confirmed) {
+      setPlants(plants.filter((_, i) => i !== idx));
+    }
   };
 
   
