@@ -112,13 +112,13 @@ export default function Plants() {
     });
 
   return (
-    <div style={{ padding: '2rem', paddingTop: '11rem', maxWidth: '700px', margin: '0 auto', textAlign: 'left' }}>
+    <div style={{ padding: '2rem', paddingTop: '11rem', margin: '0 auto', textAlign: 'center' }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', marginBottom: 24 }}>
         <SearchField
           handleinput={e => setFilter(e.target.value)}
           filter={filter}
         />
-        <div style={{ width: '340px', maxWidth: '100%', textAlign: 'left' }}>
+        <div style={{ width: '340px', maxWidth: '100%', textAlign: 'center' }}>
           <label htmlFor="levelFilter" style={{ fontWeight: 500, marginBottom: 4, display: 'block', color: '#388e3c' }}>Filter by Level:</label>
           <select
             id="levelFilter"
@@ -271,7 +271,7 @@ export default function Plants() {
         </form>
       </div>
       
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
         {filteredPlantsWithIndex.map(({ plant, idx }) => (
           <PlantCard
             key={idx}
