@@ -20,15 +20,21 @@ export default function Plants() {
   const [filter, setFilter] = useState('');
   const [levelFilter, setLevelFilter] = useState('all');
   const [form, setForm] = useState({ name: '', description: '', level: '' });
-  const [editIndex, setEditIndex] = useState(null);
 
   useEffect(() => {
     const stored = getStoredPlants();
+    let initial = [];
     if (stored.length === 0) {
-      setPlants([...defaultCards]);
+      initial = [...defaultCards];
     } else {
-      setPlants(stored);
+      initial = stored;
     }
+    // Restore Aloe Vera if missing
+    if (!initial.some(p => p.name === 'Aloe Vera')) {
+      const aloe = defaultCards.find(p => p.name === 'Aloe Vera');
+      if (aloe) initial = [aloe, ...initial];
+    }
+    setPlants(initial);
   }, []);
 
   useEffect(() => {
@@ -45,25 +51,12 @@ export default function Plants() {
   const handleSubmit = e => {
     e.preventDefault();
     if (!form.name.trim() || !form.level) return;
-    if (editIndex !== null) {
-      const updated = [...plants];
-      updated[editIndex] = form;
-      setPlants(updated);
-      setEditIndex(null);
-    } else {
-      setPlants([form, ...plants]);
-    }
+    setPlants([form, ...plants]);
     setForm({ name: '', description: '', level: '' });
-  };
-
-  const handleEdit = idx => {
-    setForm(plants[idx]);
-    setEditIndex(idx);
   };
 
   const handleDelete = idx => {
     setPlants(plants.filter((_, i) => i !== idx));
-    if (editIndex === idx) setEditIndex(null);
   };
 
   // Map filteredPlants to their original indices
@@ -80,6 +73,27 @@ export default function Plants() {
 
   return (
     <div style={{ padding: '2rem', maxWidth: '700px', margin: '0 auto', textAlign: 'left' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', marginBottom: 24 }}>
+        <SearchField
+          handleinput={e => setFilter(e.target.value)}
+          filter={filter}
+        />
+        <div style={{ width: '340px', maxWidth: '100%', textAlign: 'left' }}>
+          <label htmlFor="levelFilter" style={{ fontWeight: 500, marginBottom: 4, display: 'block', color: '#388e3c' }}>Filter by Level:</label>
+          <select
+            id="levelFilter"
+            value={levelFilter}
+            onChange={e => setLevelFilter(e.target.value)}
+            style={{ padding: '0.7rem', borderRadius: 8, border: '1px solid #b2dfdb', fontSize: 16, width: '100%' }}
+          >
+            <option value="all">All Levels</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
+      </div>
+
       <div style={{
         background: '#f8fafc',
         border: '1px solid #d1e7dd',
@@ -155,36 +169,12 @@ export default function Plants() {
               padding: '0.7rem 1.5rem',
               fontSize: 16,
               cursor: 'pointer',
-              marginRight: editIndex !== null ? 8 : 0,
-            }}>{editIndex !== null ? 'Update' : 'Add'}</button>
-            {editIndex !== null && (
-              <button type="button" onClick={() => { setForm({ name: '', description: '', level: '' }); setEditIndex(null); }} style={{
-                background: '#e57373',
-                color: 'white',
-                border: 'none',
-                borderRadius: 8,
-                padding: '0.7rem 1.5rem',
-                fontSize: 16,
-                cursor: 'pointer',
-              }}>
-                Cancel
-              </button>
-            )}
+              marginRight: 0,
+            }}>Add</button>
           </div>
         </form>
       </div>
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: 16 }}>
-        <SearchField
-          handleinput={e => setFilter(e.target.value)}
-          filter={filter}
-        />
-        <select value={levelFilter} onChange={e => setLevelFilter(e.target.value)}>
-          <option value="all">All Levels</option>
-          <option value="beginner">Beginner</option>
-          <option value="intermediate">Intermediate</option>
-          <option value="expert">Expert</option>
-        </select>
-      </div>
+      {/* Removed duplicate search field and filters below the Add a Plant card */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
         {filteredPlantsWithIndex.map(({ plant, idx }) => (
           <PlantCard

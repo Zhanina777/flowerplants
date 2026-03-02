@@ -1,16 +1,23 @@
+import video from '../assets/video.mp4';
+
 export default function DefaultPage() {
 	return (
-		<div style={{ padding: '2rem', maxWidth: '700px', margin: '0 auto', textAlign: 'left' }}>
-			<h1>Welcome to FlowerPlant </h1>
-			<p>
-				At FlowerPlant, we believe every home deserves a touch of green. Whether you’re a passionate gardener, a curious beginner, or someone who just bought their very first plant, our community is here to help you grow with confidence.
-			</p>
-			<p>
-				FlowerPlant is more than just a website — it’s a welcoming space where plant lovers can explore detailed plant care guides, discover new species, and manage their personal plant collections in one easy-to-use platform. Our goal is to make plant care simple, accessible, and enjoyable for everyone.
-			</p>
-			<p>
-				From understanding light requirements to mastering watering routines, we guide you step-by-step so your plants can thrive.
-			</p>
+		<div style={{ padding: '2rem', maxWidth: '900px', margin: '0 auto', textAlign: 'left' }}>
+			<h1 style={{ marginBottom: 16 }}>Welcome to FlowerPlant</h1>
+			<div style={{ display: 'flex', alignItems: 'flex-start', gap: 32, marginBottom: 32, flexWrap: 'wrap' }}>
+				<video src={video} loop autoPlay muted style={{ width: 480, maxWidth: '100%', borderRadius: 12, boxShadow: '0 2px 12px rgba(60,120,60,0.08)', marginTop: 24 }} />
+				<div style={{ flex: 1, minWidth: 260 }}>
+					<p>
+						At FlowerPlant, we believe every home deserves a touch of green. Whether you’re a passionate gardener, a curious beginner, or someone who just bought their very first plant, our community is here to help you grow with confidence.
+					</p>
+					<p>
+						FlowerPlant is more than just a website — it’s a welcoming space where plant lovers can explore detailed plant care guides, discover new species, and manage their personal plant collections in one easy-to-use platform. Our goal is to make plant care simple, accessible, and enjoyable for everyone.
+					</p>
+					<p>
+						From understanding light requirements to mastering watering routines, we guide you step-by-step so your plants can thrive.
+					</p>
+				</div>
+			</div>
 
 			<h2> Basic Plant Care Information</h2>
 			<p>Taking care of plants doesn’t have to be complicated. Here are the fundamental principles every plant parent should know:</p>

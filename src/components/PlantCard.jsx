@@ -4,12 +4,22 @@ export default function PlantCard({ plant, onEdit, onDelete }) {
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({ ...plant });
 
+  // Keep form in sync if plant prop changes
+  React.useEffect(() => {
+    setForm({ ...plant });
+  }, [plant]);
+
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSave = () => {
     onEdit(form);
+    setEditing(false);
+  };
+
+  const handleCancel = () => {
+    setForm({ ...plant });
     setEditing(false);
   };
 
@@ -36,7 +46,7 @@ export default function PlantCard({ plant, onEdit, onDelete }) {
           </select>
           <div className="plant-card-actions">
             <button onClick={handleSave}>Save</button>
-            <button onClick={() => setEditing(false)}>Cancel</button>
+            <button onClick={handleCancel}>Cancel</button>
           </div>
         </>
       ) : (
