@@ -49,7 +49,7 @@ header.header-lightblue {
   right: 0;
   width: 100%;
   z-index: 100;
-  background: #b3e0ff;
+  background: transparent;
   padding: 1rem 0;
 }
 }
@@ -85,17 +85,16 @@ nav {
   flex-direction: column;
 }
 }
-footer {
+footer.footer-lightblue {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   width: 100%;
-  background: #e0e0e0;
+  background: transparent;
   padding: 1rem 0;
   text-align: center;
   z-index: 100;
-}
 }
 
 .logo {

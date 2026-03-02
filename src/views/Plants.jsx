@@ -61,20 +61,20 @@ export default function Plants() {
   };
 
   const handleDelete = idx => {
-    // Only allow deleting user-added cards
-    if (idx >= defaultCards.length) {
-      setPlants(plants.filter((_, i) => i !== idx));
-      if (editIndex === idx) setEditIndex(null);
-    }
+    setPlants(plants.filter((_, i) => i !== idx));
+    if (editIndex === idx) setEditIndex(null);
   };
 
   // Map filteredPlants to their original indices
   const filteredPlantsWithIndex = plants
     .map((plant, idx) => ({ plant, idx }))
     .filter(({ plant }) => {
-      const matchesName = plant.name.toLowerCase().includes(filter.toLowerCase());
-      const matchesLevel = levelFilter === 'all' || plant.level === levelFilter;
-      return matchesName && matchesLevel;
+      const keyword = filter.toLowerCase();
+      const matchesName = plant.name.toLowerCase().includes(keyword);
+      const matchesDescription = plant.description && plant.description.toLowerCase().includes(keyword);
+      const matchesAny = matchesName || matchesDescription;
+      const matchesLevelFilter = levelFilter === 'all' || plant.level === levelFilter;
+      return matchesAny && matchesLevelFilter;
     });
 
   return (
@@ -111,8 +111,8 @@ export default function Plants() {
       </form>
       <div style={{ display: 'flex', gap: '1rem', marginBottom: 16 }}>
         <SearchField
-          placeholder="Filter plants..."
-          onChange={e => setFilter(e.target.value)}
+          handleinput={e => setFilter(e.target.value)}
+          filter={filter}
         />
         <select value={levelFilter} onChange={e => setLevelFilter(e.target.value)}>
           <option value="all">All Levels</option>
@@ -136,6 +136,8 @@ export default function Plants() {
         ))}
       </div>
       {filteredPlantsWithIndex.length === 0 && <p>No plants found.</p>}
+
+      {/* ...existing code... */}
     </div>
   );
 }
