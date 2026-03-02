@@ -20,7 +20,6 @@ function App() {
           <Route path="/plants" element={<Plants />} />
           <Route path="/about" element={<About />} />
         </Routes>
-        <SearchField />
       </div>
       <Footer />
     </>

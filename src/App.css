@@ -1,3 +1,44 @@
+.plant-card input,
+.plant-card select {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.plant-card-actions button {
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #b3e0ff;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.plant-card-actions button:hover {
+  background: #90caf9;
+}
+.plant-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1rem 1.5rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 1rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.plant-card h3 {
+  margin: 0 0 0.5rem 0;
+}
+.plant-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
 .nav-square.active {
   font-weight: bold;
 }
