@@ -1,4 +1,4 @@
-import video from '../assets/video.mp4';
+import video from '../assets/5635-183850259_medium.mp4';
 
 export default function DefaultPage() {
 	return (

@@ -4,9 +4,33 @@ import PlantCard from '../components/PlantCard';
 import SearchField from '../components/SearchField';
 
 const defaultCards = [
-  { name: 'Aloe Vera', description: 'Easy to care for, great for beginners.', level: 'beginner' },
-  { name: 'Fiddle Leaf Fig', description: 'Needs some experience, intermediate care.', level: 'intermediate' },
-  { name: 'Orchid', description: 'Challenging, suited for experts.', level: 'expert' }
+  {
+    name: 'Aloe Vera',
+    scientificName: 'Aloe barbadensis miller',
+    description: 'A succulent plant species of the genus Aloe. Known for its medicinal and air-purifying properties.',
+    level: 'beginner',
+    light: 'Bright, indirect sunlight. Can tolerate some direct sun.',
+    watering: 'Allow soil to dry completely between waterings. Water every 2-3 weeks.',
+    soil: 'Cactus/succulent potting mix with excellent drainage.'
+  },
+  {
+    name: 'Fiddle Leaf Fig',
+    scientificName: 'Ficus lyrata',
+    description: 'Popular indoor tree with large, violin-shaped leaves. Needs stable conditions.',
+    level: 'intermediate',
+    light: 'Bright, filtered light. Avoid direct afternoon sun.',
+    watering: 'Water when top inch of soil is dry. About once a week.',
+    soil: 'Rich, well-draining potting soil. Avoid soggy roots.'
+  },
+  {
+    name: 'Orchid',
+    scientificName: 'Phalaenopsis (Moth Orchid)',
+    description: 'Elegant flowering plant. Requires specific care for blooms to last.',
+    level: 'expert',
+    light: 'Bright, indirect light. No direct sun.',
+    watering: 'Water every 5-12 days. Let roots dry slightly between waterings.',
+    soil: 'Special orchid bark mix for airflow and drainage.'
+  }
 ];
 
 function getStoredPlants() {
@@ -19,7 +43,15 @@ export default function Plants() {
   const [plants, setPlants] = useState([]);
   const [filter, setFilter] = useState('');
   const [levelFilter, setLevelFilter] = useState('all');
-  const [form, setForm] = useState({ name: '', description: '', level: '' });
+  const [form, setForm] = useState({
+    name: '',
+    scientificName: '',
+    description: '',
+    level: '',
+    light: '',
+    watering: '',
+    soil: ''
+  });
 
   useEffect(() => {
     const stored = getStoredPlants();
@@ -29,7 +61,7 @@ export default function Plants() {
     } else {
       initial = stored;
     }
-    // Restore Aloe Vera if missing
+    
     if (!initial.some(p => p.name === 'Aloe Vera')) {
       const aloe = defaultCards.find(p => p.name === 'Aloe Vera');
       if (aloe) initial = [aloe, ...initial];
@@ -38,7 +70,7 @@ export default function Plants() {
   }, []);
 
   useEffect(() => {
-    // Store all cards in localStorage after first card is added
+    
     if (plants.length > 0) {
       localStorage.setItem('plants', JSON.stringify(plants));
     }
@@ -52,14 +84,22 @@ export default function Plants() {
     e.preventDefault();
     if (!form.name.trim() || !form.level) return;
     setPlants([form, ...plants]);
-    setForm({ name: '', description: '', level: '' });
+    setForm({
+      name: '',
+      scientificName: '',
+      description: '',
+      level: '',
+      light: '',
+      watering: '',
+      soil: ''
+    });
   };
 
   const handleDelete = idx => {
     setPlants(plants.filter((_, i) => i !== idx));
   };
 
-  // Map filteredPlants to their original indices
+  
   const filteredPlantsWithIndex = plants
     .map((plant, idx) => ({ plant, idx }))
     .filter(({ plant }) => {
@@ -127,9 +167,65 @@ export default function Plants() {
             }}
           />
           <input
+            name="scientificName"
+            placeholder="Scientific name"
+            value={form.scientificName}
+            onChange={handleChange}
+            style={{
+              marginBottom: 10,
+              width: '90%',
+              padding: '0.7rem',
+              borderRadius: 8,
+              border: '1px solid #b2dfdb',
+              fontSize: 16,
+            }}
+          />
+          <input
             name="description"
             placeholder="Description"
             value={form.description}
+            onChange={handleChange}
+            style={{
+              marginBottom: 10,
+              width: '90%',
+              padding: '0.7rem',
+              borderRadius: 8,
+              border: '1px solid #b2dfdb',
+              fontSize: 16,
+            }}
+          />
+          <input
+            name="light"
+            placeholder="Light requirements"
+            value={form.light}
+            onChange={handleChange}
+            style={{
+              marginBottom: 10,
+              width: '90%',
+              padding: '0.7rem',
+              borderRadius: 8,
+              border: '1px solid #b2dfdb',
+              fontSize: 16,
+            }}
+          />
+          <input
+            name="watering"
+            placeholder="Watering schedule"
+            value={form.watering}
+            onChange={handleChange}
+            style={{
+              marginBottom: 10,
+              width: '90%',
+              padding: '0.7rem',
+              borderRadius: 8,
+              border: '1px solid #b2dfdb',
+              fontSize: 16,
+            }}
+          />
+          <input
+            name="soil"
+            placeholder="Soil type"
+            value={form.soil}
             onChange={handleChange}
             style={{
               marginBottom: 10,
@@ -174,7 +270,7 @@ export default function Plants() {
           </div>
         </form>
       </div>
-      {/* Removed duplicate search field and filters below the Add a Plant card */}
+      
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
         {filteredPlantsWithIndex.map(({ plant, idx }) => (
           <PlantCard
@@ -191,7 +287,7 @@ export default function Plants() {
       </div>
       {filteredPlantsWithIndex.length === 0 && <p>No plants found.</p>}
 
-      {/* ...existing code... */}
+      
     </div>
   );
 }

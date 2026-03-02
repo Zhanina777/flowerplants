@@ -80,17 +80,12 @@ header.header-lightblue {
   display: flex;
   flex-direction: column;
 }
-}
 footer.footer-lightblue {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
   background: transparent;
   padding: 1rem 0;
   text-align: center;
-  z-index: 100;
+  margin-top: auto;
 }
 
 .logo {
