@@ -3,8 +3,8 @@ import plants2 from '../assets/plants2.jpg';
 import plants3 from '../assets/plants3.jpg';
 
 export default function About() {
-  return (
-		<div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '2rem', paddingTop: '11rem', margin: '0 auto', textAlign: 'center' }}>
+	return (
+		<div style={{ minHeight: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 0, margin: 0, textAlign: 'center', paddingTop: '8rem' }}>
 			<div style={{ width: '100%', maxWidth: '900px', textAlign: 'center' }}>
 			<h1>About FlowerPlant</h1>
 
